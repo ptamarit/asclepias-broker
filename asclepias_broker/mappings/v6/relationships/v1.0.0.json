@@ -1,6 +1,5 @@
 {
   "mappings": {
-    "doc": {
       "properties": {
         "_search_all": {
           "type": "text"
@@ -253,5 +252,4 @@
       },
       "dynamic": false
     }
-  }
 }
