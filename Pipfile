@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 celery = "==5.1.2"
+# https://stackoverflow.com/questions/72256625/why-am-i-getting-this-error-attributeerror-localstack-object-has-no-attribu
+flask-sqlalchemy = ">=2.5.1"
 idutils = "*"
 invenio = {version = "==3.4.1",extras = ["elasticsearch7", "postgresql"]}
 invenio-app = "==1.3.3"
@@ -29,7 +31,6 @@ uwsgi-tools = "*"
 uwsgitop = "*"
 ipython = "*"
 slackclient = "*"
-asclepias-broker = {file = ".", editable = true}
 
 [dev-packages]
 check-manifest = "*"
@@ -52,7 +53,7 @@ sphinxcontrib-httpdomain = "*"
 sphinxcontrib-httpexample = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
 
 [scripts]
 test = "python setup.py test"
