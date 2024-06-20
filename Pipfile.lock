@@ -713,9 +713,9 @@
         },
         "maxminddb": {
             "hashes": [
-                "sha256:df1451bcd848199905ac0de4631b3d02d6a655ad28ba5e5a4ca29a23358db712"
+                "sha256:f4d28823d9ca23323d113dc7af8db2087aa4f657fafc64ff8f7a8afda871425b"
             ],
-            "version": "==1.4.1"
+            "version": "==1.5.4"
         },
         "maxminddb-geolite2": {
             "hashes": [
