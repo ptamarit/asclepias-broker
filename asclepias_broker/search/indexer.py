@@ -93,11 +93,11 @@ def index_documents(docs: Iterable[dict], bulk: bool = False):
     """Index a list of documents into ES."""
     index_name = get_write_index()
     if bulk:
-        docs_list = list(docs)
-        print("Number of docs: " + str(len(docs_list)))
-        for doc in docs_list:
-            print(doc)
-        errors = bulk_index(
+        # docs_list = list(docs)
+        # print("Number of docs: " + str(len(docs_list)))
+        # for doc in docs_list:
+        #     print(doc)
+        bulk_index(
             client=current_search_client,
             actions=docs,
             index=index_name,
@@ -106,9 +106,9 @@ def index_documents(docs: Iterable[dict], bulk: bool = False):
             chunk_size=300,  # TODO: Make configurable
             max_chunk_bytes=(30 * 1024 * 1024),  # TODO: Make configurable
         )
-        print("Number of errors: " + str(len(errors)))
-        for error in errors:
-            print(error)
+        # print("Number of errors: " + str(len(errors)))
+        # for error in errors:
+        #     print(error)
     else:
         for doc in docs:
             current_search_client.index(
