@@ -38,7 +38,7 @@ def reindex_all_relationships(rollover: bool = True, split: bool = True,
     index_name = create_index()
     q = GroupRelationship.query.yield_per(1000)
     tasks = []
-    for chunk in chunks(q, 2):
+    for chunk in chunks(q, 100):
         if split:
             tasks.append(
                 index_group_relationships.si([str(gr.id) for gr in chunk])
