@@ -209,11 +209,11 @@
         },
         "celery": {
             "hashes": [
-                "sha256:fafbd82934d30f8a004f81e8f7a062e31413a23d444be8ee3326553915958c6d",
-                "sha256:138420c020cd58d6707e6257b6beda91fd39af7afde5d36c6334d175302c0e14"
+                "sha256:8d9a3de9162965e97f8e8cc584c67aad83b3f7a267584fa47701ed11c3e0d4b0",
+                "sha256:9dab2170b4038f7bf10ef2861dbf486ddf1d20592290a1040f7b7a1259705d42"
             ],
             "index": "pypi",
-            "version": "==5.2.7"
+            "version": "==5.1.2"
         },
         "certifi": {
             "hashes": [
@@ -726,10 +726,10 @@
         },
         "invenio-celery": {
             "hashes": [
-                "sha256:ce44aaf4ce03c7388cf25fba384a2e93f161d4b90b71e198d8177cdd3b91909c",
-                "sha256:2db34aafaa867bb42c7f6b5db1fe029e2e203f231f7a91a47fb53678398f1e4f"
+                "sha256:b8219039ac6e17cedb684e1ce99c369c77ca4b0207eedc2b147070db8a87d452",
+                "sha256:ce599456581db9d57f1167db5dd315db441a4cbfbf1223c3d0b079a1b3e5c147"
             ],
-            "version": "==1.2.4"
+            "version": "==1.2.3"
         },
         "invenio-config": {
             "hashes": [
