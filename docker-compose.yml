@@ -15,9 +15,6 @@ services:
     extends:
       file: docker-services.yml
       service: cache
-    extends:
-      file: docker-services.yml
-      service: cache
   db:
     extends:
       file: docker-services.yml
