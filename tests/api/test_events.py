@@ -20,8 +20,12 @@ from asclepias_broker.jsonschemas import EVENT_SCHEMA
 @pytest.fixture
 def access_token(app, db):
     datastore = app.extensions['security'].datastore
-    user = datastore.create_user(email='test@mail', password='', active=True)
-    db.session.commit()
+    email = 'test@mail'
+    user = datastore.get_user_by_email(email)
+    if not user:
+        user = datastore.create_user(email=email, password='', active=True)
+        db.session.commit()
+
     token = Token.create_personal(
         't', user.id, scopes=[], is_internal=True).access_token
     db.session.commit()
