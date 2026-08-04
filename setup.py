@@ -80,7 +80,7 @@ setup(
             # TODO: Fix this in Flask-Menu/Breadcrumbs (i.e. make it possible
             # to skip menus/breadcrumbs registration if the extensions aare not
             # loaded/enabled...)
-            'flask_breadcrumbs = flask_breadcrumbs:Breadcrumbs',
+            #'flask_breadcrumbs = flask_breadcrumbs:Breadcrumbs',
             ('asclepias_harvester = '
              'asclepias_broker.harvester.ext:AsclepiasHarvester'),
         ],
