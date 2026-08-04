@@ -14,7 +14,7 @@ from asclepias_broker.events.api import EventAPI
 
 
 def test_invalid_search_parameters(client):
-    search_url = url_for('invenio_records_rest.relid_list')
+    search_url = url_for('invenio_records_rest.recid_list')
 
     params = {}
     resp = client.get(search_url)
@@ -65,7 +65,7 @@ def _process_events(events):
 
 
 def test_simple_citations(client, db, es_clear):
-    search_url = url_for('invenio_records_rest.relid_list')
+    search_url = url_for('invenio_records_rest.recid_list')
     params = {'id': 'X', 'scheme': 'doi', 'relation': 'isCitedBy'}
 
     _process_events([
