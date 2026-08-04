@@ -51,7 +51,7 @@ sphinxcontrib-httpdomain = "*"
 sphinxcontrib-httpexample = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.14"
 
 [scripts]
 test = "python setup.py test"

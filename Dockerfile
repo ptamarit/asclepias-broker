@@ -4,7 +4,7 @@
 #
 # Asclepias Broker is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
-FROM python:3.8
+FROM python:3.14
 
 RUN mkdir /app
 WORKDIR /app
