@@ -14,10 +14,29 @@ from invenio_app.factory import create_api
 from invenio_search import current_search, current_search_client
 
 
+# TODO: This is not working, the blueprints are not registered.
+@pytest.fixture(scope="module")
+def extra_entry_points():
+    return {
+        'invenio_base.api_blueprints': [
+            'asclepias_broker_events = asclepias_broker.events.views:blueprint',
+            'asclepias_broker_search = asclepias_broker.search.views:blueprint',
+        ],
+    }
+
 @pytest.fixture(scope='module')
-def create_app():
+def create_app(instance_path, entry_points):
     """Application factory to be used by ``pytest-invenio``."""
     return create_api
+
+
+@pytest.fixture(scope="module")
+def app_config(app_config):
+    """Mimic an instance's configuration."""
+    app_config["JSONSCHEMAS_HOST"] = "https://test-schemas.asclepias.github.io"
+    app_config["ASCLEPIAS_SEARCH_INDEXING_ENABLED"] = False
+
+    return app_config
 
 
 @pytest.fixture(scope='function')
