@@ -9,9 +9,7 @@
 
 import datetime
 
-from sqlalchemy.orm.util import join
 from celery import  shared_task
-from sqlalchemy import and_
 from invenio_db import db
 import slack
 import os

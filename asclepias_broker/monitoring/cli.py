@@ -9,8 +9,6 @@
 
 from __future__ import absolute_import, print_function
 
-from typing import List
-
 import click
 from flask.cli import with_appcontext
 

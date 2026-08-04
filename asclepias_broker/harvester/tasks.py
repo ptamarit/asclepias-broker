@@ -8,7 +8,6 @@
 """Harvester tasks."""
 
 from typing import List, Optional
-from uuid import uuid4
 
 from celery import shared_task
 from invenio_db import db

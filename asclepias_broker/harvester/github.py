@@ -16,7 +16,6 @@ import re
 import time
 import requests
 from flask import current_app
-from sqlalchemy.orm import relationship
 from ..utils import chunks, GitHubAPIException, GithubUtility
 from .base import MetadataHarvester
 
