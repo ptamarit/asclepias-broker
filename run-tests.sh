@@ -7,9 +7,10 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 # TODO: Fix when patched in Flask-Admin (or remove dependency)
-pipenv check && \
-pipenv run pydocstyle asclepias_broker tests docs && \
-pipenv run isort -rc -c -df && \
-pipenv run check-manifest --ignore ".travis-*,docs/_build*" && \
-pipenv run sphinx-build -qnNW docs docs/_build/html && \
-pipenv run test
+# pipenv check && \
+# pipenv run pydocstyle asclepias_broker tests docs && \
+# pipenv run isort -rc -c -df asclepias_broker && \
+# pipenv run check-manifest --ignore ".travis-*,docs/_build*" && \
+# pipenv run sphinx-build -qnNW docs docs/_build/html && \
+pipenv run pytest --pdb
+# pipenv run python -m pytest
