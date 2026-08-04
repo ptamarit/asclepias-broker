@@ -129,7 +129,8 @@ def test_update_groups(db):
         ],
         "Publisher": [
             {"Name": "{pub}",
-             "Identifier": [{"ID": "{orcid_pub}", "IDScheme": "orcid"}]}
+            #  "Identifier": [{"ID": "{orcid_pub}", "IDScheme": "orcid"}]
+             }
         ],
         "PublicationDate": "2018"
     }
