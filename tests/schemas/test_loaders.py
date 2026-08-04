@@ -13,7 +13,7 @@ from tests.helpers import gen_identifier, gen_relation
 from asclepias_broker.core.models import Identifier, Relation, Relationship
 from asclepias_broker.schemas.loaders import IdentifierSchema, \
     RelationshipSchema
-
+from marshmallow.exceptions import ValidationError
 
 def compare_identifiers(a, b):
     """Identifier comparator."""
@@ -58,12 +58,15 @@ def rel_obj(source, relation, target):
 @pytest.mark.skip(reason="IDScheme validation temporarily disabled.")
 def test_identifier_schema(in_id, out_id, out_error, db, es_clear):
     """Test the schema for identifier."""
-    identifier, errors = IdentifierSchema().load(gen_identifier(*in_id))
-    if out_error:
-        assert errors == out_error
-    else:
-        assert not errors
+    # https://marshmallow.readthedocs.io/en/3.x-line/upgrading.html#upgrading-to-3-0
+    try:
+        identifier = IdentifierSchema().load(gen_identifier(*in_id))
         compare_identifiers(identifier, id_obj(*out_id))
+    except ValidationError as errors:
+        if out_error:
+            assert errors == out_error
+        else:
+            raise
 
 
 @pytest.mark.parametrize(('in_rel', 'out_rel', 'out_error'), [
@@ -79,16 +82,19 @@ def test_identifier_schema(in_id, out_id, out_error, db, es_clear):
     )
     # TODO: temporarily accept invalid schemes
     # (
-    #     (('10.1234/A', 'invalid_scheme'), 'Cites', ('10.1234/B', 'DOI')),
+    #     (('10.1234/A', 'invalid_scheme'), 'Cites', ('10.1234/B', 'DOI')),'
     #     None,
     #     {'Source': {'IDScheme': ["Invalid scheme 'invalid_scheme'"]}},
     # ),
 ])
 def test_relationship_schema(in_rel, out_rel, out_error, db, es_clear):
     """Test the schema for relationship."""
-    relationship, errors = RelationshipSchema().load(rel_dict(*in_rel))
-    if out_error:
-        assert errors == out_error
-    else:
-        assert not errors
+    try:
+        relationship = RelationshipSchema().load(rel_dict(*in_rel))
         compare_relationships(relationship, rel_obj(*out_rel))
+    except ValidationError as errors:
+        pass
+        if out_error:
+            assert errors == out_error
+        else:
+            raise
