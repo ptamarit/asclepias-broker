@@ -17,10 +17,10 @@ from ..core.models import Relationship
 from ..events.models import Event, EventStatus, ObjectEvent, PayloadType
 from ..events.signals import event_processed
 from ..metadata.api import update_metadata_from_event
+from ..monitoring.models import ErrorMonitoring
 from ..schemas.loaders import RelationshipSchema
 from ..search.indexer import update_indices
 from .api import update_groups
-from ..monitoring.models import ErrorMonitoring
 
 
 def get_or_create(model, **kwargs):

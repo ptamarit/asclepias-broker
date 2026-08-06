@@ -21,8 +21,13 @@ from invenio_search.api import RecordsSearch
 from sqlalchemy.orm import aliased
 
 from ..core.models import Identifier, Relation
-from ..graph.models import Group, GroupM2M, GroupRelationship, \
-    GroupRelationshipM2M, GroupType
+from ..graph.models import (
+    Group,
+    GroupM2M,
+    GroupRelationship,
+    GroupRelationshipM2M,
+    GroupType,
+)
 from ..utils import cached_func
 from .utils import get_write_index
 

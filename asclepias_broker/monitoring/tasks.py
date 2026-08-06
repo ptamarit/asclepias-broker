@@ -8,18 +8,19 @@
 """Monitoring tasks."""
 
 import datetime
-
-from sqlalchemy.orm.util import join
-from celery import  shared_task
-from sqlalchemy import and_
-from invenio_db import db
-import slack
 import os
 
-from ..monitoring.models import ErrorMonitoring, HarvestMonitoring, HarvestStatus
-from ..events.models import Event, EventStatus
+import slack
+from celery import shared_task
+from invenio_db import db
+from sqlalchemy import and_
+from sqlalchemy.orm.util import join
+
 from ..events.api import EventAPI
+from ..events.models import Event, EventStatus
 from ..harvester.cli import rerun_event
+from ..monitoring.models import ErrorMonitoring, HarvestMonitoring, HarvestStatus
+
 
 @shared_task(ignore_result=True)
 def rerun_harvest_errors():

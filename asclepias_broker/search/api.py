@@ -12,8 +12,7 @@ from invenio_db import db
 
 from ..core.models import Identifier, Relation
 from ..graph.api import get_group_from_id
-from ..graph.models import Group, GroupRelationship, GroupType, \
-    Identifier2Group
+from ..graph.models import Group, GroupRelationship, GroupType, Identifier2Group
 from ..schemas.loaders import from_datacite_relation
 
 

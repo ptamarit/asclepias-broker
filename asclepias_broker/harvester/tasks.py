@@ -13,8 +13,9 @@ from uuid import uuid4
 from celery import shared_task
 from invenio_db import db
 
-from .proxies import current_harvester
 from ..monitoring.models import ErrorMonitoring, HarvestMonitoring, HarvestStatus
+from .proxies import current_harvester
+
 
 @shared_task(bind=True, ignore_result=True, max_retries=1, default_retry_delay=10 * 60)
 def harvest_metadata_identifier(self, harvester: str, identifier: str, scheme: str,

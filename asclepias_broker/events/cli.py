@@ -8,17 +8,17 @@
 """Events CLI."""
 
 from __future__ import absolute_import, print_function
-import datetime
 
+import datetime
 import json
 
 import click
-from flask.cli import with_appcontext
 from flask import current_app
+from flask.cli import with_appcontext
 
+from ..graph.tasks import process_event
 from ..utils import find_ext
 from .api import EventAPI
-from ..graph.tasks import process_event
 from .models import Event, EventStatus
 
 

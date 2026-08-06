@@ -7,10 +7,11 @@
 
 """DOI metadata harvester."""
 
+import time
 from copy import deepcopy
 from datetime import datetime
 from typing import Callable, List, Union
-import time
+
 import idutils
 import requests
 from flask import current_app

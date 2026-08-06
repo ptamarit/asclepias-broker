@@ -6,6 +6,7 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 """Search utilities."""
 
+import json
 from typing import Dict, Sized
 
 from elasticsearch_dsl import Q
@@ -13,7 +14,7 @@ from elasticsearch_dsl.query import Range
 from flask import request
 from invenio_records_rest.errors import InvalidQueryRESTError
 from invenio_rest.errors import FieldError, RESTValidationError
-import json
+
 
 def search_factory(self, search, query_parser=None):
     """Parse query using elasticsearch DSL query.

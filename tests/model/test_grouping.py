@@ -6,15 +6,17 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 """Test broker model."""
-from helpers import assert_grouping, create_objects_from_relations, \
-    generate_payload
+from helpers import assert_grouping, create_objects_from_relations, generate_payload
 
 from asclepias_broker.core.models import Identifier, Relation, Relationship
 from asclepias_broker.events.api import EventAPI
-from asclepias_broker.graph.api import get_group_from_id, \
-    get_or_create_groups, merge_identity_groups, merge_version_groups
-from asclepias_broker.graph.models import Group, GroupM2M, GroupType, \
-    Identifier2Group
+from asclepias_broker.graph.api import (
+    get_group_from_id,
+    get_or_create_groups,
+    merge_identity_groups,
+    merge_version_groups,
+)
+from asclepias_broker.graph.models import Group, GroupM2M, GroupType, Identifier2Group
 from asclepias_broker.metadata.api import update_metadata
 
 

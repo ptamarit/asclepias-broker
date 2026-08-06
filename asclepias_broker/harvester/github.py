@@ -7,17 +7,17 @@
 
 """Versioning metadata harvester."""
 
+import re
+import time
 from datetime import datetime
 from typing import List
 
-from ..events.api import EventAPI
-
-import re
-import time
 import requests
 from flask import current_app
 from sqlalchemy.orm import relationship
-from ..utils import chunks, GitHubAPIException, GithubUtility
+
+from ..events.api import EventAPI
+from ..utils import GitHubAPIException, GithubUtility, chunks
 from .base import MetadataHarvester
 
 
