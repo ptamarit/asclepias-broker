@@ -8,11 +8,11 @@
 """Test citation queries."""
 
 import pytest
-from helpers import generate_payload
 
 from asclepias_broker.core.models import Identifier
 from asclepias_broker.events.api import EventAPI
 from asclepias_broker.search.api import RelationshipAPI
+from tests.helpers import generate_payload
 
 TEST_CASES = [
     (

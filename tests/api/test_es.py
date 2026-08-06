@@ -7,10 +7,14 @@
 
 """Test ElasticSearch indexing."""
 
-from helpers import assert_es_equals_db, generate_payload, reindex_all_relationships
 from invenio_search import current_search
 
 from asclepias_broker.events.api import EventAPI
+from tests.helpers import (
+    assert_es_equals_db,
+    generate_payload,
+    reindex_all_relationships,
+)
 
 
 def _group_data(id_):
