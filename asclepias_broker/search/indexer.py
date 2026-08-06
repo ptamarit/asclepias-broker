@@ -13,10 +13,8 @@ from typing import Dict, Iterable, Optional, Set, Tuple
 
 import idutils
 import sqlalchemy as sa
-#from elasticsearch.helpers import bulk as bulk_index
-bulk_index = None
-#from elasticsearch_dsl import Q
-Q = None
+from opensearchpy.helpers import bulk as bulk_index
+from opensearch_dsl import Q
 from invenio_db import db
 from invenio_search import current_search_client
 from invenio_search.api import RecordsSearch
