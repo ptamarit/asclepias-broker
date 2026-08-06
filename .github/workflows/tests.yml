@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - ci # TODO: Remove.
+  pull_request:
+    branches:
+      - master
+      - ci # TODO: Remove.
+  schedule:
+    - cron: "0 3 * * 6"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason"
+        required: false
+        default: "Manual trigger"
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+    env:
+      EXTRAS: tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install pipenv
+        # Using the latest version of pipenv not requiring setuptools >= 67 to avoid the following runtime bug:
+        #   pkg_resources._vendor.packaging.requirements.InvalidRequirement:
+        #   Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, after version specifier
+        #   pytz (>dev)
+        #   https://github.com/pypa/setuptools/issues/3889
+        run: pip install pipenv==2023.2.4
+
+      - name: Install dependencies
+        run: pipenv install --dev --deploy --system --ignore-pipfile
+
+      - name: Run tests
+        run: ./run-tests.sh
