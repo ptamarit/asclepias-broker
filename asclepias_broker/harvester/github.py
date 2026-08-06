@@ -79,7 +79,7 @@ class GitHubClient:
             raise GitHubAPIException(exc)
 
 class GitHubHarvester(MetadataHarvester):
-    """Metadata harvester for Github"""
+    """Metadata harvester for Github."""
 
     def __init__(self, *, provider_name: str = None):
         """."""

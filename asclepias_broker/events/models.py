@@ -58,7 +58,7 @@ class Event(db.Model, Timestamp):
     
     @classmethod
     def getStatsFromLastWeek(cls):
-        """Gets the stats from the last 7 days"""
+        """Gets the stats from the last 7 days."""
         last_week = datetime.datetime.now() - datetime.timedelta(days = 7)
         resp = db.session.query(cls.status, func.count('*')).filter(cls.updated > str(last_week)).group_by(cls.status).all()
         return resp
