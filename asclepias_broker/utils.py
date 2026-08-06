@@ -84,8 +84,11 @@ class GitHubAPIException(Exception):
     """Github exception."""
 
 class GithubUtility:
+    """Utility helpers for GitHub."""
+
     @classmethod
     def parse_url_info(cls, url):
+            """Parse a GitHub URL."""
             parts = url.split('/')
             github_index = next(i for i,p in enumerate(parts) if 'github.com' in p)
             

@@ -80,23 +80,27 @@ def rerun(id: str = None, all: bool = False, errors: bool = True, processing: bo
         rerun_errors(no_index, eager, start_time, end_time)
 
 def rerun_id(id:str, no_index: bool, eager:bool = False):
+        """Rerun a single harvest event by ID."""
         event = HarvestMonitoring.get(id)
         if event:
             rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_processing(no_index: bool, eager:bool = False):
+        """Rerun harvest events stuck in processing status."""
         yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
         resp = HarvestMonitoring.query.filter(HarvestMonitoring.status == HarvestStatus.Processing, HarvestMonitoring.created < str(yesterday)).all()
         for event in resp:
             rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_new(no_index: bool, eager:bool = False):
+        """Rerun harvest events stuck in new status."""
         yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
         resp = HarvestMonitoring.query.filter(HarvestMonitoring.status == HarvestStatus.New, HarvestMonitoring.created < str(yesterday)).all()
         for event in resp:
             rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_errors(no_index: bool, eager:bool = False,  start_time: str = None, end_time:str = None):
+        """Rerun harvest events in error status."""
         if start_time and end_time:
             resp = HarvestMonitoring.query.filter(HarvestMonitoring.status == HarvestStatus.Error, HarvestMonitoring.created > start_time, HarvestMonitoring.created < end_time).all()
         elif start_time:
@@ -109,6 +113,7 @@ def rerun_errors(no_index: bool, eager:bool = False,  start_time: str = None, en
             rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_event(event: HarvestMonitoring, no_index: bool, eager:bool = False):
+        """Rerun processing for a harvest monitoring event."""
         event_uuid = str(event.id)
         task = harvest_metadata_identifier.s(str(event.harvester), event.identifier, event.scheme,
                         event_uuid, None)

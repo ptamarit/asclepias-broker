@@ -30,24 +30,29 @@ class GitHubClient:
     # For some reason a different repo name when using id vs name in the Github API 
 
     def get_repo_metadata_from_id(self, id) -> dict:
+        """Fetch repository metadata from GitHub by repo ID."""
         url = self.base_url + "repositories/" + id
         return self.query_api(url)
     
     def get_repo_metadata_from_name(self, user, repo) -> dict:
+        """Fetch repository metadata from GitHub by user and repo name."""
         url = self.base_url + "repos/" + user + "/" + repo
         return self.query_api(url)
 
     def get_repo_release_from_name(self, user, repo, tag) -> dict:
+        """Fetch a release by user, repo name, and tag."""
         repo_meta = self.get_repo_metadata_from_name(user, repo)
         releases_url = repo_meta['releases_url'].replace('{/id}','')
         return self.get_repo_release(releases_url, repo_meta, tag)
 
     def get_repo_release_from_id(self, id, tag) -> dict:
+        """Fetch a release by repo ID and tag."""
         repo_meta = self.get_repo_metadata_from_id(id)
         releases_url = repo_meta['releases_url'].replace('{/id}','')
         return self.get_repo_release(releases_url, repo_meta, tag)
 
     def get_repo_release(self, url, repo_meta, tag) -> dict:
+        """Find a release with the given tag from a releases URL."""
         releases = self.query_api(url)
         for release in releases:
             if release['tag_name'] == tag:
@@ -65,6 +70,7 @@ class GitHubClient:
         return self._api_token
 
     def query_api(self, url):
+        """Query the GitHub API and return the JSON response."""
         try:
             headers = {'X-GitHub-Media-Type':'application/vnd.github.v3.raw+json'}
             token = self.get_api_token()
@@ -157,6 +163,7 @@ class GitHubHarvester(MetadataHarvester):
             return False
     
 def add_parent_identifiers(parsed_info, providers, child = None) -> List[dict]:
+    """Create relationship events for parent repository identifiers."""
     client = GitHubClient()
     add_old_name = False
     if 'user' in parsed_info.keys():
@@ -190,6 +197,7 @@ def add_parent_identifiers(parsed_info, providers, child = None) -> List[dict]:
     return payloads
 
 def add_version_identifiers(parsed_info, providers)  -> List[dict]:
+    """Create relationship events for version/release identifiers."""
     client = GitHubClient()
     add_old_name = False
     if 'user' in parsed_info.keys():
@@ -222,6 +230,7 @@ def add_version_identifiers(parsed_info, providers)  -> List[dict]:
     return payloads
 
 def create_relationship_event(src, target, relationship, providers) -> dict:
+    """Build a Scholix relationship event payload."""
     link_publication_date = datetime.now().isoformat()
     link_providers = providers or ['unknown']
     link_providers = [{'Name': provider} for provider in link_providers]

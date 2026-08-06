@@ -124,7 +124,7 @@ class ZenodoVersioningHarvester(MetadataHarvester):
         return conceptdoi, versions
 
 def check_for_github_relations(child: dict, child_scheme: str, providers: List[str], link_publication_date: str):
-
+    """Yield relationship events for GitHub related identifiers in Zenodo metadata."""
     if 'related_identifiers' in child['metadata'].keys():
         for relation in  child['metadata']['related_identifiers']:
 

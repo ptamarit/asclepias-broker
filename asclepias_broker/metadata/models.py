@@ -80,7 +80,7 @@ class GroupMetadata(db.Model, Timestamp):
         return self
 
 def mergeKey(new_json: dict, payload: dict, key: str):
-    
+    """Merge payload values for a key into metadata JSON."""
     if payload.get(key):
         if  not key in new_json.keys():
             new_json[key] = []
