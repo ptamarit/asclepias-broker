@@ -9,7 +9,7 @@
 # TODO: Fix when patched in Flask-Admin (or remove dependency)
 #pipenv check && \
 pipenv run pydocstyle asclepias_broker tests docs && \
-pipenv run isort -rc -c -df && \
+pipenv run isort -c --df . && \
 pipenv run check-manifest --ignore "docs/_build*" && \
 #pipenv run sphinx-build -qnNW docs docs/_build/html && \
 pipenv run test
