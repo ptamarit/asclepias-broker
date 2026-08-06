@@ -12,4 +12,4 @@ pipenv run pydocstyle asclepias_broker tests docs && \
 pipenv run isort -c --df . && \
 pipenv run check-manifest --ignore "docs/_build*" && \
 #pipenv run sphinx-build -qnNW docs docs/_build/html && \
-pipenv run test
+pipenv run pytest
