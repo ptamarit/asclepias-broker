@@ -46,5 +46,8 @@ jobs:
       - name: Install dependencies
         run: pipenv install --system --dev
 
+      - name: Install missing dependencies
+        run: pipenv install flask-admin==1.5.3
+
       - name: Run tests
         run: ./run-tests.sh
