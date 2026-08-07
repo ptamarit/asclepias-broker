@@ -29,7 +29,6 @@ uwsgi-tools = "*"
 uwsgitop = "*"
 ipython = "*"
 slackclient = "*"
-flask-admin = "==1.5.3"
 
 [dev-packages]
 check-manifest = "*"
