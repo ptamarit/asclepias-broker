@@ -44,7 +44,7 @@ jobs:
         run: pip install pipenv==2023.2.4
 
       - name: Install dependencies
-        run: pipenv install --dev --deploy --system --ignore-pipfile
+        run: pipenv install --system --dev
 
       - name: Run tests
         run: ./run-tests.sh
