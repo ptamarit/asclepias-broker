@@ -10,10 +10,12 @@
 # Verify that all services are running before continuing
 check_ready() {
     RETRIES=5
+    EXP_BACKOFF_TIME=2
     while ! $2
     do
         echo "Waiting for $1, $((RETRIES--)) remaining attempts..."
-        sleep 2
+        sleep $EXP_BACKOFF_TIME
+        EXP_BACKOFF_TIME=$(( EXP_BACKOFF_TIME*2 ))
         if [ $RETRIES -eq 0 ]
         then
             echo "Couldn't reach $1"
