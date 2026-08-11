@@ -17,14 +17,18 @@ from __future__ import absolute_import, print_function
 import os
 from datetime import timedelta
 
+from celery.schedules import crontab
 from invenio_app.config import APP_DEFAULT_SECURE_HEADERS
 from invenio_records_rest.facets import range_filter, terms_filter
 from invenio_records_rest.utils import deny_all
 from invenio_search.api import RecordsSearch
-from celery.schedules import crontab
 
-from .search.query import enum_term_filter, nested_range_filter, \
-    nested_terms_filter, simple_query_string_filter
+from .search.query import (
+    enum_term_filter,
+    nested_range_filter,
+    nested_terms_filter,
+    simple_query_string_filter,
+)
 
 
 def _parse_env_bool(var_name, default=None):

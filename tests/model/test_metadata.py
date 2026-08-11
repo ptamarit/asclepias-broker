@@ -12,8 +12,7 @@ from jsonschema.exceptions import ValidationError
 
 from asclepias_broker.core.models import Relation
 from asclepias_broker.graph.models import Group, GroupRelationship, GroupType
-from asclepias_broker.metadata.models import GroupMetadata, \
-    GroupRelationshipMetadata
+from asclepias_broker.metadata.models import GroupMetadata, GroupRelationshipMetadata
 
 
 def update_and_compare(m, payload, expected=None):

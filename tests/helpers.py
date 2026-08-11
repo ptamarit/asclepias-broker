@@ -15,12 +15,17 @@ from invenio_search import RecordsSearch, current_search
 
 from asclepias_broker.core.models import Identifier, Relationship
 from asclepias_broker.graph.api import get_or_create_groups
-from asclepias_broker.graph.models import Group, GroupM2M, GroupRelationship, \
-    GroupRelationshipM2M, GroupType, Identifier2Group, \
-    Relationship2GroupRelationship
+from asclepias_broker.graph.models import (
+    Group,
+    GroupM2M,
+    GroupRelationship,
+    GroupRelationshipM2M,
+    GroupType,
+    Identifier2Group,
+    Relationship2GroupRelationship,
+)
 from asclepias_broker.jsonschemas import SCHOLIX_RELATIONS
-from asclepias_broker.metadata.models import GroupMetadata, \
-    GroupRelationshipMetadata
+from asclepias_broker.metadata.models import GroupMetadata, GroupRelationshipMetadata
 from asclepias_broker.search import tasks as search_tasks
 
 #

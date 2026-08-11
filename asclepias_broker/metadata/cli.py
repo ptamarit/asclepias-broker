@@ -12,13 +12,14 @@ from __future__ import absolute_import, print_function
 import json
 
 import click
+from flask import current_app
 from flask.cli import with_appcontext
+from invenio_db import db
 
+from ..monitoring.models import ErrorMonitoring
 from ..utils import find_ext
 from .api import update_metadata
-from ..monitoring.models import ErrorMonitoring 
-from flask import current_app
-from invenio_db import db
+
 
 @click.group()
 def metadata():

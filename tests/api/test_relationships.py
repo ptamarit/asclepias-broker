@@ -8,9 +8,9 @@
 """Test search endpoint."""
 
 from flask import url_for
-from tests.helpers import generate_payload, reindex_all_relationships
 
 from asclepias_broker.events.api import EventAPI
+from tests.helpers import generate_payload, reindex_all_relationships
 
 
 def test_invalid_search_parameters(client):

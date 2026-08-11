@@ -15,7 +15,6 @@ import requests
 from flask import current_app
 
 from ..harvester.github import GitHubHarvester
-
 from ..utils import chunks
 from .base import MetadataHarvester
 

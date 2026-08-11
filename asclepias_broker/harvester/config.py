@@ -9,11 +9,11 @@
 
 from kombu import Exchange
 
-from .metadata import ADSMetadataHarvester, DOIMetadataHarvester
-from .zenodo import ZenodoVersioningHarvester
-from .github import GitHubHarvester
 from .crossref import CrossrefHarvester
 from .europepmc import EuropePMCHarvester
+from .github import GitHubHarvester
+from .metadata import ADSMetadataHarvester, DOIMetadataHarvester
+from .zenodo import ZenodoVersioningHarvester
 
 ASCLEPIAS_HARVESTER_HISTORY_PREFIX = 'asclepias-harvester'
 

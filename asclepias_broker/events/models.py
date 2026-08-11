@@ -7,17 +7,17 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 """Event database models."""
 
+import datetime
 import enum
 import uuid
 from typing import Union
-import datetime
 
 from invenio_accounts.models import User
 from invenio_db import db
+from sqlalchemy import func
 from sqlalchemy.schema import PrimaryKeyConstraint
 from sqlalchemy_utils.models import Timestamp
 from sqlalchemy_utils.types import JSONType, UUIDType
-from sqlalchemy import func
 
 from ..core.models import Identifier, Relationship
 

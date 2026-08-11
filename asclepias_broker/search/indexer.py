@@ -13,16 +13,21 @@ from typing import Dict, Iterable, Optional, Set, Tuple
 
 import idutils
 import sqlalchemy as sa
-from opensearchpy.helpers import bulk as bulk_index
-from opensearch_dsl import Q
 from invenio_db import db
 from invenio_search import current_search_client
 from invenio_search.api import RecordsSearch
+from opensearch_dsl import Q
+from opensearchpy.helpers import bulk as bulk_index
 from sqlalchemy.orm import aliased
 
 from ..core.models import Identifier, Relation
-from ..graph.models import Group, GroupM2M, GroupRelationship, \
-    GroupRelationshipM2M, GroupType
+from ..graph.models import (
+    Group,
+    GroupM2M,
+    GroupRelationship,
+    GroupRelationshipM2M,
+    GroupType,
+)
 from ..utils import cached_func
 from .utils import get_write_index
 

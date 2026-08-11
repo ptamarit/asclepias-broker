@@ -17,9 +17,10 @@ from invenio_db import db
 from ..core.models import Identifier, Relation, Relationship
 from ..graph.api import get_group_from_id, get_or_create_groups
 from ..graph.models import GroupRelationship, GroupType
+from ..monitoring.models import ErrorMonitoring
 from ..utils import chunks
 from .models import GroupMetadata, GroupRelationshipMetadata
-from ..monitoring.models import ErrorMonitoring 
+
 
 # TODO: When merging/splitting groups there is some merging/duplicating of
 # metadata as well

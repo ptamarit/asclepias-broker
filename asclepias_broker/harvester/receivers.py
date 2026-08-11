@@ -8,7 +8,8 @@
 
 from ..events.models import Event, PayloadType
 from .proxies import current_harvester
-from .tasks import  harvest_metadata
+from .tasks import harvest_metadata
+
 
 def harvest_metadata_after_event_process(app, event: Event = None):
     """."""

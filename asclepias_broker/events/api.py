@@ -9,8 +9,7 @@
 import jsonschema
 from flask import current_app
 from invenio_db import db
-from marshmallow.exceptions import \
-    ValidationError as MarshmallowValidationError
+from marshmallow.exceptions import ValidationError as MarshmallowValidationError
 from werkzeug.local import LocalProxy
 
 from ..graph.tasks import process_event

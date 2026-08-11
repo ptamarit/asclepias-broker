@@ -8,12 +8,12 @@
 """Test marshmallow loaders."""
 
 import pytest
-from tests.helpers import gen_identifier, gen_relation
+from marshmallow.exceptions import ValidationError
 
 from asclepias_broker.core.models import Identifier, Relation, Relationship
-from asclepias_broker.schemas.loaders import IdentifierSchema, \
-    RelationshipSchema
-from marshmallow.exceptions import ValidationError
+from asclepias_broker.schemas.loaders import IdentifierSchema, RelationshipSchema
+from tests.helpers import gen_identifier, gen_relation
+
 
 def compare_identifiers(a, b):
     """Identifier comparator."""

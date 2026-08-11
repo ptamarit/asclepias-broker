@@ -14,6 +14,7 @@ from flask.cli import with_appcontext
 
 from .tasks import sendMonitoringReport
 
+
 @click.group()
 def monitor():
     """Monitoring CLI commands."""

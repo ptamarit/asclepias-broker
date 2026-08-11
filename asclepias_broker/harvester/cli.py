@@ -8,16 +8,16 @@
 """Harvesting CLI."""
 
 from __future__ import absolute_import, print_function
-import datetime
 
+import datetime
 from typing import List
 
 import click
-from ..monitoring.models import HarvestMonitoring, HarvestStatus
-from ..harvester.tasks import harvest_metadata_identifier
 import idutils
 from flask.cli import with_appcontext
 
+from ..harvester.tasks import harvest_metadata_identifier
+from ..monitoring.models import HarvestMonitoring, HarvestStatus
 from .tasks import harvest_events, harvest_metadata
 
 

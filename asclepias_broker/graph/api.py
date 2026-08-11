@@ -15,8 +15,15 @@ from sqlalchemy.orm import aliased
 
 from ..core.models import Identifier, Relation, Relationship
 from ..metadata.models import GroupMetadata, GroupRelationshipMetadata
-from .models import Group, GroupM2M, GroupRelationship, GroupRelationshipM2M, \
-    GroupType, Identifier2Group, Relationship2GroupRelationship
+from .models import (
+    Group,
+    GroupM2M,
+    GroupRelationship,
+    GroupRelationshipM2M,
+    GroupType,
+    Identifier2Group,
+    Relationship2GroupRelationship,
+)
 
 
 def merge_group_relationships(

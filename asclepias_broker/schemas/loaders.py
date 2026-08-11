@@ -15,8 +15,8 @@ from flask import current_app
 from marshmallow import Schema, fields, post_load, pre_load, validates_schema
 from marshmallow.exceptions import ValidationError
 
-from ..utils import GithubUtility
 from ..core.models import Identifier, Relation, Relationship
+from ..utils import GithubUtility
 
 DATACITE_RELATION_MAP = {
     'Cites': [

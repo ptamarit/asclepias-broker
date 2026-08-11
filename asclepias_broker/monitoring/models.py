@@ -7,16 +7,17 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 """Monitoring database models."""
 
-import uuid
-import enum
 import datetime
+import enum
+import uuid
 
-from sqlalchemy.sql.sqltypes import Boolean
-from sqlalchemy import func
 from invenio_db import db
+from sqlalchemy import func
 from sqlalchemy.dialects import postgresql
+from sqlalchemy.sql.sqltypes import Boolean
 from sqlalchemy_utils.models import Timestamp
 from sqlalchemy_utils.types import JSONType, UUIDType
+
 
 class HarvestStatus(enum.Enum):
     """Event status."""
