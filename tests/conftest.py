@@ -36,6 +36,7 @@ def app_config(app_config):
     """Mimic an instance's configuration."""
     app_config["JSONSCHEMAS_HOST"] = "https://test-schemas.asclepias.github.io"
     app_config["ASCLEPIAS_SEARCH_INDEXING_ENABLED"] = False
+    app_config["ASCLEPIAS_HARVESTER_METADATA_HARVESTERS"] = {}
 
     return app_config
 
