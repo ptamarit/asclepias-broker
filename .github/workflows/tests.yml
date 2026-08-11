@@ -52,5 +52,8 @@ jobs:
       - name: Wait for Docker services
         run: ./docker/wait-for-services.sh
 
+      - name: Setup Docker services
+        run: ./scripts/setup
+
       - name: Run tests
         run: ./run-tests.sh
