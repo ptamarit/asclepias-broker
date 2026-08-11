@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - upgrade # TODO: Remove.
+  pull_request:
+    branches:
+      - master
+      - upgrade # TODO: Remove.
+  schedule:
+    - cron: "0 3 * * 6"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason"
+        required: false
+        default: "Manual trigger"
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.14"]
+    env:
+      EXTRAS: tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Install dependencies
+        run: pipenv install --system --dev
+
+      - name: Start Docker services
+        run: docker compose up -d es db cache mq
+
+      - name: Wait for Docker services
+        run: ./docker/wait-for-services.sh
+
+      - name: Setup Docker services
+        run: ./scripts/setup
+
+      - name: Run tests
+        run: ./run-tests.sh
