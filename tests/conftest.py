@@ -20,6 +20,14 @@ def create_app():
     return create_api
 
 
+@pytest.fixture(scope="module")
+def app_config(app_config):
+    """Mimic an instance's configuration."""
+    app_config["JSONSCHEMAS_HOST"] = "https://test-schemas.asclepias.github.io"
+
+    return app_config
+
+
 @pytest.fixture(scope='function')
 def es_clear(es_clear):
     """Clear Elasticsearch indices and aliases."""
