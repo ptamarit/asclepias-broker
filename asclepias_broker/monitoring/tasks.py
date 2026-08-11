@@ -13,8 +13,6 @@ import os
 import slack
 from celery import shared_task
 from invenio_db import db
-from sqlalchemy import and_
-from sqlalchemy.orm.util import join
 
 from ..events.api import EventAPI
 from ..events.models import Event, EventStatus

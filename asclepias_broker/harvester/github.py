@@ -14,7 +14,6 @@ from typing import List
 
 import requests
 from flask import current_app
-from sqlalchemy.orm import relationship
 
 from ..events.api import EventAPI
 from ..utils import GitHubAPIException, GithubUtility, chunks

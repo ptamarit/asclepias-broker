@@ -13,10 +13,8 @@ import datetime
 import json
 
 import click
-from flask import current_app
 from flask.cli import with_appcontext
 
-from ..graph.tasks import process_event
 from ..utils import find_ext
 from .api import EventAPI
 from .models import Event, EventStatus
