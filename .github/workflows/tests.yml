@@ -42,7 +42,7 @@ jobs:
         run: pipenv install --system --dev
 
       - name: Start Docker services
-        run: docker compose up -d es db cache mq
+        run: docker compose up --quiet-pull -d es db cache mq
 
       - name: Wait for Docker services
         run: ./docker/wait-for-services.sh
