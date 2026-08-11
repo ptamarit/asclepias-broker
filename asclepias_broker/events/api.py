@@ -71,6 +71,7 @@ class EventAPI:
     
     @classmethod
     def rerun_event(cls, event: Event, no_index: bool, eager:bool = False):
+        """Rerun processing for an existing event."""
         event_uuid = str(event.id)
         idx_enabled = current_app.config['ASCLEPIAS_SEARCH_INDEXING_ENABLED'] \
             and (not no_index)

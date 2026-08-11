@@ -62,8 +62,7 @@ def to_model(model_cls):
 
             @post_load
             def to_model(self, data, **kwargs):
-                """Remove the link date and provider metadata"""
-
+                """Remove the link date and provider metadata."""
                 data.pop('link_publication_date', None)
                 data.pop('link_provider', None)
                 data.pop('id_url', None)
@@ -94,6 +93,7 @@ def from_scholix_relation(rel_obj: dict) -> Tuple[Relation, bool]:
 
 class LinkProviderSchema(Schema):
     """LinkProvider loader schema."""
+
     name = fields.String(required=True, data_key='Name')
 
 @to_model(Identifier)

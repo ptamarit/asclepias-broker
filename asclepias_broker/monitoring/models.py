@@ -21,6 +21,7 @@ from sqlalchemy_utils.types import JSONType, UUIDType
 
 class HarvestStatus(enum.Enum):
     """Event status."""
+
     New = 1
     Processing = 2
     Error = 3
@@ -45,7 +46,7 @@ class ErrorMonitoring(db.Model, Timestamp):
 
     @classmethod
     def getLastWeeksErrors(cls, **kwargs):
-        """Gets all the errors from last week where it has been rerun for at least 2 times all ready"""
+        """Gets all the errors from last week where it has been rerun for at least 2 times all ready."""
         last_week = datetime.datetime.now() - datetime.timedelta(days = 8)
         resp = cls.query.filter(cls.created > str(last_week), cls.n_retries > 2).all()
         return resp
@@ -82,14 +83,14 @@ class HarvestMonitoring(db.Model, Timestamp):
     
     @classmethod
     def isRecentlyAdded(cls, identifier: str, scheme: str, harvester: str, **kwargs) -> Boolean:
-        """Check if the same identifier has been queried for during the last week to avoid duplicates"""
+        """Check if the same identifier has been queried for during the last week to avoid duplicates."""
         last_week = datetime.datetime.now() - datetime.timedelta(days = 7)
         resp = cls.query.filter(cls.identifier==identifier, cls.scheme==scheme, cls.harvester==harvester, cls.updated > str(last_week)).first()
         return resp is not None
 
     @classmethod
     def getStatsFromLastWeek(cls):
-        """Gets the stats from the last 7 days"""
+        """Gets the stats from the last 7 days."""
         last_week = datetime.datetime.now() - datetime.timedelta(days = 7)
         resp = db.session.query(cls.status, func.count('*')).filter(cls.updated > str(last_week)).group_by(cls.status).all()
         return resp

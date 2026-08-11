@@ -5,7 +5,7 @@
 #
 # Asclepias Broker is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
-"""Monitoring tasks"""
+"""Monitoring tasks."""
 
 import datetime
 import os
@@ -22,6 +22,7 @@ from ..monitoring.models import ErrorMonitoring, HarvestMonitoring, HarvestStatu
 
 @shared_task(ignore_result=True)
 def rerun_harvest_errors():
+    """Rerun harvest events that failed in the last two days."""
     two_days_ago = datetime.datetime.now() - datetime.timedelta(days = 2)
     resp = HarvestMonitoring.query.filter(HarvestMonitoring.status == HarvestStatus.Error, HarvestMonitoring.created > str(two_days_ago)).all()
     for event in resp:
@@ -29,6 +30,7 @@ def rerun_harvest_errors():
 
 @shared_task(ignore_result=True)
 def rerun_event_errors():
+    """Rerun events that failed in the last two days."""
     two_days_ago = datetime.datetime.now() - datetime.timedelta(days = 2)
     resp = Event.query.filter(Event.status == EventStatus.Error, Event.created > str(two_days_ago)).all()
     for event in resp:
@@ -36,11 +38,11 @@ def rerun_event_errors():
 
 @shared_task(ignore_result=True)
 def sendMonitoringReport():
-    """Sends monitor report to the Slack bot defined with SLACK_API_TOKEN in the enviroment
+    """Sends monitor report to the Slack bot defined with SLACK_API_TOKEN in the enviroment.
     
     Sends a report of the number of events and harvester that have been done during the last 7 days 
-    and also adds a list of all errors that have taken place during the ingestions"""
-
+    and also adds a list of all errors that have taken place during the ingestions.
+    """
     slack_token = os.environ.get("SLACK_API_TOKEN")
     if slack_token is not None and slack_token != "CHANGE_ME":
         client = slack.WebClient(token=slack_token)
@@ -51,18 +53,21 @@ def sendMonitoringReport():
         sendEventReport(client, channel)
 
 def sendHarvestErrors(client, channel):
+    """Send harvest error report to Slack."""
     errors = (db.session.query(ErrorMonitoring)
     .join(HarvestMonitoring, ErrorMonitoring.event_id == HarvestMonitoring.id)
     .filter(HarvestMonitoring.status == HarvestStatus.Error))
     sendErrorReport(errors, client, channel)
 
 def sendEventErrors(client, channel):
+    """Send event error report to Slack."""
     errors = (db.session.query(ErrorMonitoring)
     .join(Event, ErrorMonitoring.event_id == Event.id)
     .filter(Event.status == EventStatus.Error))
     sendErrorReport(errors, client, channel)
 
 def sendErrorReport(errors, client, channel:str):
+    """Send error details to a Slack channel."""
     blocks = []
     blocks.append({"type": "section",
                 "text": {
@@ -115,6 +120,7 @@ def sendErrorReport(errors, client, channel:str):
 
 
 def sendHarvestReport(client, channel:str):
+    """Send harvest statistics report to Slack."""
     list = HarvestMonitoring.getStatsFromLastWeek()
     fields = []
     for obj in list:
@@ -146,6 +152,7 @@ def sendHarvestReport(client, channel:str):
 
 
 def sendEventReport(client, channel:str):
+    """Send event statistics report to Slack."""
     list = Event.getStatsFromLastWeek()
     fields = []
     for obj in list:

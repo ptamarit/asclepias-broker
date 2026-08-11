@@ -67,23 +67,27 @@ def rerun(id: str = None, all: bool = False, errors: bool = True, processing: bo
         rerun_errors(no_index, eager)
 
 def rerun_id(id:str, no_index: bool, eager:bool = False):
+        """Rerun a single event by ID."""
         event = Event.get(id)
         if event:
             EventAPI.rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_processing(no_index: bool, eager:bool = False):
+        """Rerun events stuck in processing status."""
         yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
         resp = Event.query.filter(Event.status == EventStatus.Processing, Event.created < str(yesterday)).all()
         for event in resp:
             EventAPI.rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_new(no_index: bool, eager:bool = False):
+        """Rerun events stuck in new status."""
         yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
         resp = Event.query.filter(Event.status == EventStatus.New, Event.created < str(yesterday)).all()
         for event in resp:
             EventAPI.rerun_event(event, no_index=no_index, eager=eager)
 
 def rerun_errors(no_index: bool, eager:bool = False):
+        """Rerun all events in error status."""
         resp = Event.query.filter(Event.status == EventStatus.Error).all()
         for event in resp:
             EventAPI.rerun_event(event, no_index=no_index, eager=eager)
