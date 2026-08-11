@@ -9,6 +9,7 @@ include .dockerignore
 include .editorconfig
 include .tx/config
 include *.rst
+include *.md
 include *.sh
 include *.txt
 include *.yml
