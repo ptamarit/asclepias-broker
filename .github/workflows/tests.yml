@@ -46,5 +46,11 @@ jobs:
       - name: Install dependencies
         run: pipenv install --system --dev
 
+      - name: Start Docker services
+        run: docker compose up -d es db cache mq
+
+      - name: Wait for Docker services
+        run: ./docker/wait-for-services.sh
+
       - name: Run tests
         run: ./run-tests.sh
