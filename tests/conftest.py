@@ -17,6 +17,7 @@ from invenio_search import current_search, current_search_client
 # TODO: This is not working, the blueprints are not registered.
 @pytest.fixture(scope="module")
 def extra_entry_points():
+    """Register extra entry point."""
     return {
         'invenio_base.api_blueprints': [
             'asclepias_broker_events = asclepias_broker.events.views:blueprint',
