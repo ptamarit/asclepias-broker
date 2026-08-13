@@ -51,6 +51,14 @@ def search_clear(search_clear):
             index=f'{alias}*', ignore=[400, 404])
 
 
+# @pytest.fixture(scope="function")
+# def db_session_options():
+#     """Database session options."""
+#     # This helps with ``sqlalchemy.orm.exc.DetachedInstanceError`` when models are not
+#     # bound to the session between transactions/requests/service-calls.
+#     return {"expire_on_commit": False}
+
+
 #
 # JSON schema and test data loading fixtures
 #
