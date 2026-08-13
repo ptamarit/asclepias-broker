@@ -26,7 +26,8 @@ def extra_entry_points():
     }
 
 @pytest.fixture(scope='module')
-def create_app(instance_path, entry_points):
+def create_app():
+# def create_app(instance_path, entry_points):
     """Application factory to be used by ``pytest-invenio``."""
     return create_api
 
