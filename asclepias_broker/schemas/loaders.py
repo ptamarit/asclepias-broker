@@ -13,6 +13,7 @@ from typing import Tuple
 import idutils
 from flask import current_app
 from marshmallow import Schema, fields, post_load, pre_load, validates_schema
+# from marshmallow_utils.context import context_schema
 from marshmallow.exceptions import ValidationError
 
 from ..core.models import Identifier, Relation, Relationship
@@ -55,9 +56,16 @@ def to_model(model_cls):
     def inner(Cls):
         class ToModelSchema(Cls):
 
+            # RemovedInMarshmallow4Warning: The `context` parameter is deprecated and will be removed in marshmallow 4.0.
+            # Use `contextvars.ContextVar` to pass context instead.
+
             def __init__(self, *args, check_existing=False, **kwargs):
+
                 kwargs.setdefault('context', {})
                 kwargs['context'].setdefault('check_existing', check_existing)
+
+                # context_schema.set({'check_existing': check_existing})
+
                 super().__init__(*args, **kwargs)
 
             @post_load
@@ -67,9 +75,14 @@ def to_model(model_cls):
                 data.pop('link_provider', None)
                 data.pop('id_url', None)
                 data.pop('license_url', None)
+
                 if self.context.get('check_existing'):
                     return model_cls.get(**data) or model_cls(**data)
                 return model_cls(**data)
+
+                # if context_schema.get().get('check_existing'):
+                #     return model_cls.get(**data, context=context_schema.get()) or model_cls(**data, context=context_schema.get())
+                # return model_cls(**data, context=context_schema.get())
         return ToModelSchema
     return inner
 
