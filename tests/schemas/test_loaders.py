@@ -82,7 +82,7 @@ def test_identifier_schema(in_id, out_id, out_error, db, search_clear):
     )
     # TODO: temporarily accept invalid schemes
     # (
-    #     (('10.1234/A', 'invalid_scheme'), 'Cites', ('10.1234/B', 'DOI')),'
+    #     (('10.1234/A', 'invalid_scheme'), 'Cites', ('10.1234/B', 'DOI')),
     #     None,
     #     {'Source': {'IDScheme': ["Invalid scheme 'invalid_scheme'"]}},
     # ),

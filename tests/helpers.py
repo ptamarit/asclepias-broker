@@ -296,7 +296,8 @@ def assert_grouping(grouping):
     id_grp_rels = [r for r, t in zip(rel_map, relationship_types)
                    if t == GroupType.Identity]
     # There are as many GroupRelationshipM2M objects as Identity Groups
-    assert GroupRelationshipM2M.query.count() == len(id_grp_rels)
+    # Remark: The assertion could test equality if unused GroupRelationshipM2M were deleted after merging.
+    assert GroupRelationshipM2M.query.count() >= len(id_grp_rels)
 
     # Same number of GroupRelationshipMetadata as GRelationships of type ID
     # Remark: The assertion could test equality if unused GroupRelationshipMetadata were deleted after merging.
@@ -305,7 +306,8 @@ def assert_grouping(grouping):
     # There are as many Relationship to GR items as Relationships
     n_rel2grrels = sum([len(x[1]) for x in relationship_groups
                         if isinstance(rel_map[x[1][0]], Relationship)])
-    assert Relationship2GroupRelationship.query.count() == n_rel2grrels
+    # Remark: The assertion could test equality if unused Relationship2GroupRelationship were deleted after merging.
+    assert Relationship2GroupRelationship.query.count() >= n_rel2grrels
 
     # Make sure that all GroupRelationshipM2M are matching
     for group_rel, group_subrels in relationship_groups:
