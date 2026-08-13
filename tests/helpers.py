@@ -151,6 +151,16 @@ def create_objects_from_relations(relationships: List[Tuple],
 
         Will create Identifier, Relationship, Group and all M2M objects.
     """
+    # FIXME: Figure out why the DB is not rolled back after every test
+    GroupM2M.query.delete()
+    GroupRelationshipM2M.query.delete()
+    Relationship2GroupRelationship.query.delete()
+    GroupRelationship.query.delete()
+    Relationship.query.delete()
+    Identifier2Group.query.delete()
+    Identifier.query.delete()
+    Group.query.delete()
+
     if not metadata:
         metadata = [({}, {}, {}) for _ in range(len(relationships))]
     assert len(relationships) == len(metadata)
