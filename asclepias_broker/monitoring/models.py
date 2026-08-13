@@ -15,7 +15,6 @@ from invenio_db import db
 from sqlalchemy import func
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.sql.sqltypes import Boolean
-from sqlalchemy_utils.models import Timestamp
 from sqlalchemy_utils.types import JSONType, UUIDType
 
 
@@ -27,7 +26,7 @@ class HarvestStatus(enum.Enum):
     Error = 3
     Done = 4
 
-class ErrorMonitoring(db.Model, Timestamp):
+class ErrorMonitoring(db.Model, db.Timestamp):
     """Error monitoring model."""
 
     __tablename__ = 'error_monitoring'
@@ -65,7 +64,7 @@ class ErrorMonitoring(db.Model, Timestamp):
         return str(self.to_dict())
 
 
-class HarvestMonitoring(db.Model, Timestamp):
+class HarvestMonitoring(db.Model, db.Timestamp):
     """Harvesting monitoring model."""
 
     __tablename__ = 'harvest_monitoring'

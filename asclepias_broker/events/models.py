@@ -16,7 +16,6 @@ from invenio_accounts.models import User
 from invenio_db import db
 from sqlalchemy import func
 from sqlalchemy.schema import PrimaryKeyConstraint
-from sqlalchemy_utils.models import Timestamp
 from sqlalchemy_utils.types import JSONType, UUIDType
 
 from ..core.models import Identifier, Relationship
@@ -38,7 +37,7 @@ class PayloadType(enum.Enum):
     Identifier = 2
 
 
-class Event(db.Model, Timestamp):
+class Event(db.Model, db.Timestamp):
     """Event model."""
 
     __tablename__ = 'event'
@@ -68,7 +67,7 @@ class Event(db.Model, Timestamp):
         return f"<{self.id}: {self.created}>"
 
 
-class ObjectEvent(db.Model, Timestamp):
+class ObjectEvent(db.Model, db.Timestamp):
     """Event related to an Identifier or Relationship."""
 
     __tablename__ = 'objectevent'
@@ -89,9 +88,9 @@ class ObjectEvent(db.Model, Timestamp):
     def object(self) -> Union[Identifier, Relationship]:
         """Get the associated Identifier or Relationship."""
         if self.payload_type == PayloadType.Identifier:
-            return Identifier.query.get(self.object_uuid)
+            return db.session.get(Identifier, self.object_uuid)
         else:
-            return Relationship.query.get(self.object_uuid)
+            return db.session.get(Relationship, self.object_uuid)
 
     def __repr__(self):
         """String representation of the object event."""
