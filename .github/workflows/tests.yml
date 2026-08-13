@@ -47,13 +47,17 @@ jobs:
         run: pipenv install --system --dev
 
       - name: Start Docker services
-        run: docker compose up -d es db cache mq
+        run: docker compose up --quiet-pull -d es db cache mq
+        #docker-services-cli up --db ${DB:-postgresql} --search ${SEARCH:-opensearch2} --cache ${CACHE:-redis} --mq ${MQ:-rabbitmq} --env)"
 
       - name: Wait for Docker services
         run: ./docker/wait-for-services.sh
 
-      - name: Setup Docker services
-        run: ./scripts/setup
+      # - name: Setup Docker services
+      #   run: ./scripts/setup
+
+        # Install application code and entrypoints from 'setup.py'
+        #pipenv run pip install -e $script_path/..
 
       - name: Run tests
         run: ./run-tests.sh

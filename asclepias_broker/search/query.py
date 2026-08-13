@@ -8,11 +8,11 @@
 
 from typing import Dict
 
-from elasticsearch_dsl import Q
-from elasticsearch_dsl.query import Range
 from flask import request
 from invenio_records_rest.errors import InvalidQueryRESTError
 from invenio_rest.errors import FieldError, RESTValidationError
+from opensearch_dsl import Q
+from opensearch_dsl.query import Range
 
 
 def search_factory(self, search, query_parser=None):

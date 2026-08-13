@@ -11,6 +11,8 @@ pipenv run invenio shell --no-term-title -c "import redis; redis.StrictRedis.fro
 pipenv run invenio db destroy --yes-i-know
 pipenv run invenio db init create
 pipenv run invenio index destroy --force --yes-i-know
-pipenv run invenio index init --force
+#pipenv run invenio index delete relationships
+pipenv run invenio index create relationships -b asclepias_broker/mappings/os-v2/relationships/v1.0.0.json
+#pipenv run invenio index init --force
 pipenv run invenio queues delete
-pipenv run invenio queues declare
+pipenv run invenio queues declare # asclepias_harvester_queues

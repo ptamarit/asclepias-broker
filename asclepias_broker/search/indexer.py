@@ -13,11 +13,11 @@ from typing import Dict, Iterable, Optional, Set, Tuple
 
 import idutils
 import sqlalchemy as sa
-from elasticsearch.helpers import bulk as bulk_index
-from elasticsearch_dsl import Q
 from invenio_db import db
 from invenio_search import current_search_client
 from invenio_search.api import RecordsSearch
+from opensearch_dsl import Q
+from opensearchpy.helpers import bulk as bulk_index
 from sqlalchemy.orm import aliased
 
 from ..core.models import Identifier, Relation
@@ -104,7 +104,7 @@ def index_documents(docs: Iterable[dict], bulk: bool = False):
             index=index_name,
             # Setting doc_type to None for OpenSearch v2 with Elasticsearch v7 compatibility mode,
             # where the bulk URL should be `/_bulk` instead of `/_doc/_bulk`.
-            doc_type=None,
+            # doc_type=None, # Remark: This is not needed anymore with OpenSearch v3
             raise_on_error=False,
             chunk_size=300,  # TODO: Make configurable
             max_chunk_bytes=(30 * 1024 * 1024),  # TODO: Make configurable
@@ -190,7 +190,7 @@ def index_identity_group_relationships(
         .filter(*filter_cond)
     )
 
-    ig_obj = Group.query.get(ig_id)
+    ig_obj = db.session.get(Group, ig_id)
 
     def _build_doc(row):
         _, rel, src_vg = row
@@ -219,7 +219,7 @@ def index_identity_group_relationships(
         .filter(*filter_cond)
     )
 
-    vg_obj = Group.query.get(vg_id)
+    vg_obj = db.session.get(Group, vg_id)
 
     def _build_doc(row):
         rel, trg_ig = row

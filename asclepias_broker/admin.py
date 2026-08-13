@@ -9,13 +9,7 @@
 
 from __future__ import absolute_import, print_function
 
-try:
-    from flask_admin.contrib.sqla import ModelView
-except:
-    class ModelView():
-        """Temporary ModelView class."""
-
-        pass
+from flask_admin.contrib.sqla import ModelView
 
 from .core.models import Identifier, Relationship
 from .events.models import Event

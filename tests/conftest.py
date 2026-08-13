@@ -14,8 +14,20 @@ from invenio_app.factory import create_api
 from invenio_search import current_search, current_search_client
 
 
+# # TODO: This is not working, the blueprints are not registered.
+# @pytest.fixture(scope="module")
+# def extra_entry_points():
+#     """Register extra entry point."""
+#     return {
+#         'invenio_base.api_blueprints': [
+#             'asclepias_broker_events = asclepias_broker.events.views:blueprint',
+#             'asclepias_broker_search = asclepias_broker.search.views:blueprint',
+#         ],
+#     }
+
 @pytest.fixture(scope='module')
 def create_app():
+# def create_app(instance_path, entry_points):
     """Application factory to be used by ``pytest-invenio``."""
     return create_api
 
@@ -24,17 +36,27 @@ def create_app():
 def app_config(app_config):
     """Mimic an instance's configuration."""
     app_config["JSONSCHEMAS_HOST"] = "https://test-schemas.asclepias.github.io"
+    app_config["ASCLEPIAS_SEARCH_INDEXING_ENABLED"] = False
+    app_config["ASCLEPIAS_HARVESTER_METADATA_HARVESTERS"] = {}
 
     return app_config
 
 
 @pytest.fixture(scope='function')
-def es_clear(es_clear):
-    """Clear Elasticsearch indices and aliases."""
-    yield es_clear
+def search_clear(search_clear):
+    """Clear OpenSearch indices and aliases."""
+    yield search_clear
     for alias in current_search.active_aliases:
         current_search_client.indices.delete(
             index=f'{alias}*', ignore=[400, 404])
+
+
+# @pytest.fixture(scope="function")
+# def db_session_options():
+#     """Database session options."""
+#     # This helps with ``sqlalchemy.orm.exc.DetachedInstanceError`` when models are not
+#     # bound to the session between transactions/requests/service-calls.
+#     return {"expire_on_commit": False}
 
 
 #

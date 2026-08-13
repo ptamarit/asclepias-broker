@@ -20,8 +20,12 @@ from tests.helpers import assert_es_equals_db, reindex_all_relationships
 @pytest.fixture
 def access_token(app, db):
     datastore = app.extensions['security'].datastore
-    user = datastore.create_user(email='test@mail', password='', active=True)
-    db.session.commit()
+    email = 'test@mail'
+    user = datastore.get_user_by_email(email)
+    if not user:
+        user = datastore.create_user(email=email, password='', active=True)
+        db.session.commit()
+
     token = Token.create_personal(
         't', user.id, scopes=[], is_internal=True).access_token
     db.session.commit()
@@ -44,7 +48,7 @@ def test_endpoint_auth(client):
     assert resp.status_code == 401
 
 
-def test_example_events(client, example_events, db, es_clear, auth_headers):
+def test_example_events(client, example_events, db, search_clear, auth_headers):
     """Load the example events from asclepias_broker/examples."""
     event_url = url_for('asclepias_events.event', _external=True)
     for data in example_events:
@@ -55,7 +59,7 @@ def test_example_events(client, example_events, db, es_clear, auth_headers):
     assert_es_equals_db()
 
 
-def test_invalid_payload(client, db, es, auth_headers):
+def test_invalid_payload(client, db, search, auth_headers):
     """Test error handling for ingestion."""
     event_url = url_for('asclepias_events.event', _external=True)
     # Completely invalid JSON structure
@@ -100,7 +104,7 @@ def test_invalid_payload(client, db, es, auth_headers):
     resp = client.post(event_url, data=json.dumps(data), headers=auth_headers,
                        content_type='application/json')
     assert resp.status_code == 422
-    assert 'is too short' in resp.json['message']
+    assert 'should be non-empty' in resp.json['message']
 
     data = deepcopy(data_valid)
     # Fetch the maxItems constraint from schema
