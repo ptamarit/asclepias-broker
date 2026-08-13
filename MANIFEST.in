@@ -23,6 +23,7 @@ include docker/postgres/Dockerfile
 include Dockerfile
 include LICENSE
 include Pipfile
+include Pipfile-specific-version
 include Pipfile.lock
 include pytest.ini
 include scripts/bootstrap
