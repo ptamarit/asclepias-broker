@@ -127,5 +127,4 @@ Before you submit a pull request, check that it meets these guidelines:
 1. The pull request should include tests and must not decrease test coverage.
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring.
-3. Check https://travis-ci.org/asclepias/asclepias-broker/pull_requests
-   and make sure that all tests pass.
+3. Check the CI results and make sure that all tests pass.
