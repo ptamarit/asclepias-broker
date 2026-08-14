@@ -89,9 +89,9 @@ class ObjectEvent(db.Model, Timestamp):
     def object(self) -> Union[Identifier, Relationship]:
         """Get the associated Identifier or Relationship."""
         if self.payload_type == PayloadType.Identifier:
-            return Identifier.query.get(self.object_uuid)
+            return db.session.get(Identifier, self.object_uuid)
         else:
-            return Relationship.query.get(self.object_uuid)
+            return db.session.get(Relationship, self.object_uuid)
 
     def __repr__(self):
         """String representation of the object event."""

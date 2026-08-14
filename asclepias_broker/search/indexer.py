@@ -182,7 +182,7 @@ def index_identity_group_relationships(
         .filter(*filter_cond)
     )
 
-    ig_obj = Group.query.get(ig_id)
+    ig_obj = db.session.get(Group, ig_id)
 
     def _build_doc(row):
         _, rel, src_vg = row
@@ -211,7 +211,7 @@ def index_identity_group_relationships(
         .filter(*filter_cond)
     )
 
-    vg_obj = Group.query.get(vg_id)
+    vg_obj = db.session.get(Group, vg_id)
 
     def _build_doc(row):
         rel, trg_ig = row
